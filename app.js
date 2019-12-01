@@ -3,6 +3,8 @@ var expressSanitizer= require("express-sanitizer"),
     bodyParser      = require("body-parser"),
     mongoose        = require("mongoose"),
     express         = require("express"),
+    User            = require("./Authentication/usermodel"),
+    indexRoutes     = require("./Authentication/indexroute")
     app             = express();
 
 //APP CONFIG
@@ -22,6 +24,7 @@ var blogSchema = new mongoose.Schema({
 var Blog = mongoose.model("Blog",blogSchema);
 
 //ROUTES
+app.use(indexRoutes);
 
 //HOME PAGE
 app.get("/", function(req, res){

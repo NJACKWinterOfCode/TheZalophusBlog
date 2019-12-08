@@ -1,12 +1,8 @@
 const express=require('express');
 const graphqlHttp=require('express-graphql');
 const mongoose=require('mongoose');
-const bcrypt=require('bcryptjs');
 const logger = require('morgan');
 
-
-//get user model for mongodb
-const UserModel=require('./models/user');
 
 //get graphql resolvers and schema
 const graphqlSchema=require('./graphql/schema/index');

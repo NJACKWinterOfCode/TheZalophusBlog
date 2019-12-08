@@ -13,7 +13,6 @@ const graphqlResolvers=require('./graphql/resolvers/index');
 const app = express();
 
 //set all middleware
-app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -38,17 +37,18 @@ app.use(
   })
 );
 
-//server initialization
-app.listen(3002, ()=>
-{
-  console.log('connected to 3002');
-})
+
 
 //connect to mongo database
 mongoose.connect(`mongodb+srv://sankha:sankha@cluster0-blgns.mongodb.net/test?retryWrites=true&w=majority`,{ useNewUrlParser:true, useUnifiedTopology:true })
 .then((res)=>
 {
     console.log('mongodb connected');
+})
+.then(()=> {
+  app.listen(8000, ()=>{
+    console.log('connected to 8000')
+  })
 })
 .catch((err)=>
 { 

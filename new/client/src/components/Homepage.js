@@ -1,9 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
+import {Redirect} from 'react-router-dom'
+import AuthContext from '../context/auth-context'
 
-class Homepage extends Component {
-  render() {
-    return <h1>The Home Page</h1>;
-  }
-}
+const Homepage = props => (
+  <AuthContext.Consumer>
+  {context => {
+    return (
+      <div className="homepage">
+          <h1>Homepage</h1>
+            {!context.token && (
+                  <Redirect from="/homepage" to="/auth"/>
+              )}
+            {context.token && (
+                  <button onClick={context.logout}>Logout</button>
+            )}
+      </div>
+    );
+  }}
+</AuthContext.Consumer>
+);
 
 export default Homepage;

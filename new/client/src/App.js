@@ -36,7 +36,7 @@ class App extends Component {
                 {this.state.userId && (<Redirect from="/auth" to="/homepage" exact/>)}
                 {!this.state.userId && (<Route path="/auth" component={AuthPage}/>)}
                 <Route path="/homepage" component={Homepage}/>
-                {!this.state.token && <Redirect to="/auth" exact/>}
+                {!this.state.userId && <Redirect to="/auth" exact/>}
               </Switch>
             </main>
           </AuthContext.Provider>

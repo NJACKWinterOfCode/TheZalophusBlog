@@ -37,7 +37,6 @@ app.use(
 );
 
 
-
 //connect to mongo database
 mongoose.connect(`mongodb+srv://sankha:sankha@cluster0-blgns.mongodb.net/test?retryWrites=true&w=majority`,{ useNewUrlParser:true, useUnifiedTopology:true })
 .then((res)=>

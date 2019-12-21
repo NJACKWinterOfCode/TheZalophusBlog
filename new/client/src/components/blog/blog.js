@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const Blog=(props)=>
 {
-    console.log(props);
+    // console.log(props);
     const { blogs }=props;
     const blogsView=blogs.length>0 ? blogs.map((item, i)=>{
         return(

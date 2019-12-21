@@ -50,5 +50,26 @@ module.exports = {
             }
           );
           return { userId: user.id, token: token, tokenExpiration: 1 };
+        },
+        getUserDetails:async (args, request)=>{
+          const { userId }=request;
+          return User.findById(userId)
+          .then((users)=>{
+            return users;
+          }).catch((err)=>{
+            console.log(err);
+          })
+        },
+        updateInfo: async (args, request)=>{
+          console.log(args);
+          const { userId }=request;
+          const { fname, lname, username, email, description, image }=args.UpdateInput;
+          return User.findByIdAndUpdate(userId,{ fname, lname, username, email, description, image })
+          .then((res)=>{
+            return "updated";
+          })
+          .catch((err)=>{
+            console.log(err);
+          })
         }
       };

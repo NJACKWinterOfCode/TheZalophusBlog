@@ -18,7 +18,7 @@ const Homepage=(props)=>
     }).then(res => {
       return res.json();
     }).then((res)=>{
-      console.log(res);
+      // console.log(res);
       type==='blogs' ? setBlogs(res.data.blogs) : setBlogs(res.data.getAllBlogs)
     }).catch((err)=>{
       console.log(err);

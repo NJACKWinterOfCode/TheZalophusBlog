@@ -15,6 +15,18 @@ const schema=buildSchema(`
         image:String!
     }
 
+    type UserDetails {
+        _id: ID!
+        fname:String!
+        lname:String!
+        username:String!
+        email: String!
+        password: String!
+        birthDate:String!
+        image:String!
+        description:String!
+    }
+
     type Blog {
         _id:ID!
         title:String!
@@ -40,6 +52,15 @@ const schema=buildSchema(`
         image:String!
     }
 
+    input UpdateInput {
+        fname:String!
+        lname:String!
+        username:String!
+        email:String!
+        description:String!
+        image:String!
+    }
+
     input BlogInput {
         title:String!
         image:String!
@@ -57,12 +78,14 @@ const schema=buildSchema(`
         blogs:[Blog!]!
         login(email: String!, password: String!): AuthData!
         getAllBlogs:[Blog!]!
+        getUserDetails:UserDetails!
     }
 
     type RootMutation {
         createUser(userInput : UserInput) : User
         createBlog(blogInput : BlogInput) : Blog
         checkAuth(uid:ID) : String
+        updateInfo(UpdateInput:UpdateInput) : String
     }
 
     schema {

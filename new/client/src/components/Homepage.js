@@ -1,28 +1,13 @@
 import React,{ useEffect, useState } from 'react';
-// import AuthContext from '../context/auth-context'
-import NavbarComponent from './navbar/navbar';
 import Blog from './blog/blog';
+import CheckAuth from './auth/checkAuth';
 
 const Homepage=(props)=>
 {
+  // console.log(props);
   const [blogs, setBlogs]=useState([]);
-  const getData=()=>{
+  const getData=(requestBody, type)=>{
     const token=localStorage.getItem("token");
-    const requestBody={
-      query:`
-      query {
-        blogs {
-          _id
-          title
-          image
-          body
-          creator
-          created
-        }
-      }
-      `
-    }
-
     fetch("http://localhost:8000/graphql",{
       method:'POST',
       body:JSON.stringify(requestBody),
@@ -33,12 +18,8 @@ const Homepage=(props)=>
     }).then(res => {
       return res.json();
     }).then((res)=>{
-      if(res.errors && res.errors[0].message==="Unauthenticated"){
-        props.history.push("/");
-        // throw new Error("Unauthenticated user");
-      }
       console.log(res);
-      setBlogs(res.data.blogs);
+      type==='blogs' ? setBlogs(res.data.blogs) : setBlogs(res.data.getAllBlogs)
     }).catch((err)=>{
       console.log(err);
     })
@@ -46,11 +27,49 @@ const Homepage=(props)=>
   }
   
   useEffect(()=>{
-    getData();
+    CheckAuth()
+    .then(()=>{
+      props.changeState(true);
+      const requestBody={
+        query:`
+        query {
+          blogs {
+            _id
+            title
+            image
+            body
+            creator
+            created
+          }
+        }
+        `
+      }
+      const type='blogs';
+      getData(requestBody, type);
+    }).catch(()=>{
+      console.log("Catch Block");
+      props.changeState(false);
+      const requestBody={
+        query:`
+        query {
+          getAllBlogs {
+            _id
+            title
+            image
+            body
+            creator
+            created
+          }
+        }
+        `
+      }
+      const type='getAllBlogs';
+      getData(requestBody, type);
+    })
   },[])
   return(
     <>
-    <NavbarComponent props={ props } />
+    {/* <NavbarComponent props={ props } /> */}
     <Blog blogs={ blogs } />
     </>
   )

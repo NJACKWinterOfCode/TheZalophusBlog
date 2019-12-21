@@ -65,6 +65,7 @@ const schema = buildSchema(`
         blogs:[Blog!]!
         blogDetails(blogId: ID!): BlogDetails!
         login(email: String!, password: String!): AuthData!
+        getAllBlogs:[Blog!]!
     }
 
     type RootMutation {

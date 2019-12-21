@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Auth.css';
-import CheckAuth from './checkAuth';
 
 class AuthPage extends Component {
   state = {
@@ -22,11 +21,12 @@ class AuthPage extends Component {
   switchModeHandler = () => {
     this.setState(prevState => {
       return { isLogin: !prevState.isLogin };
+    },()=>{
+      this.state.isLogin ? this.props.history.push('/login') : this.props.history.push('/register')
     });
   };
 
   updateInfo=(e)=>{
-    console.log(e.target.value);
     this.setState({ [e.target.name]:e.target.value })
   }
 
@@ -84,10 +84,11 @@ class AuthPage extends Component {
       .then(resData => {
         console.log(resData);
         if(resData.data.login){
+          this.props.changeState(true);
           const { token, userId }=resData.data.login;
           localStorage.setItem("token", token);
           localStorage.setItem("uid", userId);
-          this.props.history.push("/home");
+          this.props.history.push("/");
         }
         else if(resData.data.createUser){
           alert("Registered");
@@ -100,17 +101,15 @@ class AuthPage extends Component {
         console.log(err);
       });
   };
-
-  // UNSAFE_componentWillMount(){}
   
-  // componentDidMount(){
-  //   CheckAuth()
-  //   .then(()=>{
-  //     this.props.history.push("/home");
-  //   }).catch((err)=>{
-      
-  //   })
-  // }
+  componentDidMount(){
+    const type=this.props.match.params.type
+    if(type){
+      type==='login' ? this.setState({ isLogin:true }) : this.setState({ isLogin:false })
+    }else{
+      console.log('Undefined');
+    }
+  }
 
   uploadFile=async (e)=>{
     const convertTobase64=(file)=>{
@@ -130,7 +129,7 @@ class AuthPage extends Component {
 
     convertTobase64(e.target.files[0])
     .then((res)=>{
-      console.log(res);
+      // console.log(res);
       this.setState({ image:res })
     })
   }

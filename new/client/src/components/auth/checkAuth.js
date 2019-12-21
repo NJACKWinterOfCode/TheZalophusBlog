@@ -27,7 +27,7 @@ const CheckAuth=()=>{
             }else{
                 resolve();
             }
-            console.log(res);
+            // console.log(res);
         }).catch((err)=>{
             console.log(err);
         })

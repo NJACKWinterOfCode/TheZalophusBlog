@@ -70,5 +70,16 @@ module.exports = {
             return "True"
         else 
             return "False"
+    },
+    getAllBlogs: async (args, request)=>{
+        return BlogModel.find()
+        .then((blogs)=>{
+            console.log(blogs);
+            return blogs.map(blog=>{
+                return {...blog._doc, _id:blog.id};
+            })
+        }).catch((err)=>{
+            console.log(err);
+        })
     }
 }

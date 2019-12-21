@@ -1,8 +1,8 @@
-const { buildSchema }=require('graphql');
-const { gql } =require('apollo-server-express')
+const { buildSchema } = require('graphql');
+const { gql } = require('apollo-server-express')
 
 
-const schema=buildSchema(`
+const schema = buildSchema(`
 
     type User {
         _id: ID!
@@ -18,6 +18,14 @@ const schema=buildSchema(`
     type Blog {
         _id:ID!
         title:String!
+        image:String!
+        body:String!
+        creator:String!
+        created:String!
+    }
+
+    type BlogDetails {
+        title: String!
         image:String!
         body:String!
         creator:String!
@@ -55,6 +63,7 @@ const schema=buildSchema(`
     type RootQuery {
         user:[User!]!
         blogs:[Blog!]!
+        blogDetails(blogId: ID!): BlogDetails!
         login(email: String!, password: String!): AuthData!
     }
 
@@ -62,6 +71,8 @@ const schema=buildSchema(`
         createUser(userInput : UserInput) : User
         createBlog(blogInput : BlogInput) : Blog
         checkAuth(uid:ID) : String
+        blogUpdate(blogId: ID, newBody: String) : String
+        blogDelete(blogId: ID) : String
     }
 
     schema {
@@ -70,6 +81,6 @@ const schema=buildSchema(`
     }
 `);
 
-module.exports={
+module.exports = {
     schema
 }

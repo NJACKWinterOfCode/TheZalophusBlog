@@ -6,6 +6,7 @@ import AuthPage from './components/auth/Auth';
 import Homepage from './components/Homepage';
 import CreateBlogForm from './components/blog/createBlogForm';
 import CheckAuth from './components/auth/checkAuth';
+import BlogDetails from './components/blog/blogDetails'
 
 class App extends Component {
   state={
@@ -29,6 +30,9 @@ class App extends Component {
                 )} />
                 <Route path="/new" render={props=>(
                   this.state.isLoggedin===true ? <CreateBlogForm {...props} /> : (this.state.isLoggedin===false ? <Redirect to="/" /> : null)
+                )} />
+                <Route path="/blog/:blogId" render={props => (
+                  this.state.isLoggedin === true ? <BlogDetails {...props} /> : (this.state.isLoggedin === false ? <Redirect to="/" /> : null)
                 )} />
               </Switch>
             </main>

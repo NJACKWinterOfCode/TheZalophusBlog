@@ -61,6 +61,10 @@ const schema=buildSchema(`
         image:String!
     }
 
+    input RandomUserInput {
+        username:String!
+    }
+
     input BlogInput {
         title:String!
         image:String!
@@ -86,6 +90,7 @@ const schema=buildSchema(`
         createBlog(blogInput : BlogInput) : Blog
         checkAuth(uid:ID) : String
         updateInfo(UpdateInput:UpdateInput) : String
+        getRandomUserDetails(RandomUserInput:RandomUserInput):UserDetails
     }
 
     schema {

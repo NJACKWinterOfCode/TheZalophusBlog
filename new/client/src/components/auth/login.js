@@ -38,7 +38,7 @@ const Login=(props)=>{
         return res.json();
       })
       .then(resData => {
-        // console.log(resData);
+        console.log(resData);
         if(resData.data.login){
             // alert('Loggedin');
           props.changeState(true);

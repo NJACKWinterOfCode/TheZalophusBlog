@@ -61,7 +61,7 @@ module.exports = {
           })
         },
         updateInfo: async (args, request)=>{
-          console.log(args);
+          // console.log(args);
           const { userId }=request;
           const { fname, lname, username, email, description, image }=args.UpdateInput;
           return User.findByIdAndUpdate(userId,{ fname, lname, username, email, description, image })
@@ -69,6 +69,17 @@ module.exports = {
             return "updated";
           })
           .catch((err)=>{
+            console.log(err);
+          })
+        },
+        getRandomUserDetails: async (args, request)=>{
+          const { userId }=request;
+          const requestedUserName=args.RandomUserInput.username;
+          return User.findOne({ username:requestedUserName })
+          .then((res)=>{
+            // console.log(res);
+            return res;
+          }).catch((err)=>{
             console.log(err);
           })
         }

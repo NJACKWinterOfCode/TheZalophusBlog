@@ -66,9 +66,9 @@
 ## Contributions 
 
 * TheZalophusBlog/Old is deprecated is currently being moved to REACT + GraphQL. 
-* Please solve issues issues in TheZalophusBlog/New only. 
+* Please solve issues in TheZalophusBlog/New only. 
 * Contributors are welcome and please comment on the issue before working on it.
-* Create pull requests, submit bugs, suggest new features.
+* Create pull requests, submit [bugs](https://github.com/NJACKWinterOfCode/TheZalophusBlog/issues/new), suggest [new features](https://github.com/NJACKWinterOfCode/TheZalophusBlog/issues/new).
 
 <br>
 
